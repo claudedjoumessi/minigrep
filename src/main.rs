@@ -1,4 +1,6 @@
-use std::{env, error::Error, fs, process};
+use std::{env, process};
+use minigrep::Config;
+
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -11,35 +13,10 @@ fn main() {
     println!("Query is: {}", config.query);
     println!("File path is: {}", config.file_path);
 
-    if let Err(e) = run(config) {
+    if let Err(e) = minigrep::run(config) {
         println!("File reading error: {}!\n Exiting...", e);
         process::exit(1);
     }
 }
 
-fn run(config: Config) -> Result<(), Box<dyn Error>> {
-    let contents = fs::read_to_string(config.file_path)?;
 
-    println!("With contents\n: {contents}");
-    Ok(())
-}
-
-struct Config {
-    query: String,
-    file_path: String,
-}
-
-/// Config instance
-impl Config {
-    /// Builds a new `Config` object from args
-    /// and throws an `Err` in case `args.len() < 3`
-    fn build(args: &[String]) -> Result<Config, &'static str> {
-        if args.len() < 3 {
-            return Err("Not enough arguments!. Exiting...");
-        }
-        let query = args[1].clone();
-        let file_path = args[2].clone();
-
-        Ok(Config { query, file_path })
-    }
-}

@@ -11,7 +11,10 @@ fn main() {
     println!("Query is: {}", config.query);
     println!("File path is: {}", config.file_path);
 
-    run(config);
+    if let Err(e) = run(config) {
+        println!("File reading error: {}!\n Exiting...", e);
+        process::exit(1);
+    }
 }
 
 fn run(config: Config) -> Result<(), Box<dyn Error>> {

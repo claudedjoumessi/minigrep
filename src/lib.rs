@@ -36,24 +36,51 @@ mod test {
   use super::*;
 
   #[test]
-  /// Search Test
-  fn one_result() {
+  /// Case sensitive search test
+  fn case_sensitive() {
     let query = "duct";
     let contents = "\
 Rust:
 safe, fast, productive.
-Pick three.";
+Pick three.
+Duct tape."; // We do not expect this line as it has a 'D' while duct has a 'd'
 
     assert_eq!(vec!["safe, fast, productive."], search(query, contents));
   }
+  #[test]
+  /// Case insensitive search test
+  fn case_insensitive() {
+    let query = "ruSt";
+    let contents = "\
+Rust:
+safe, fast, productive.
+Pick three.
+Trust me.";
+
+    assert_eq!(vec!["Rust:", "Trust me."], search_case_insensitive(query, contents));
+  }
 }
 
-/// Search functionality
+/// Search functionality (case sensitive)
 pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
   let mut results = Vec::new();
 
   for line in contents.lines() {
     if line.contains(query) {
+      results.push(line);
+    }
+  }
+
+  results
+}
+
+/// Search functionality (case insensitive)
+pub fn search_case_insensitive<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
+  let mut results = Vec::new();
+  let query = query.to_lowercase(); // lowercasing here...
+
+  for line in contents.lines() {
+    if line.to_lowercase().contains(&query) { // to borrow here
       results.push(line);
     }
   }

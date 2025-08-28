@@ -12,6 +12,7 @@ fn main() {
 
     println!("Query is: {}", config.query);
     println!("File path is: {}", config.file_path);
+    println!();
 
     if let Err(e) = minigrep::run(config) {
         println!("File reading error: {}!\n Exiting...", e);

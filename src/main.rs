@@ -6,7 +6,7 @@ fn main() {
     let args: Vec<String> = env::args().collect();
     
     let config = Config::build(&args).unwrap_or_else(|err| {
-        println!("Oops! Grepped into an error: {}", err);
+        eprintln!("Oops! Grepped into an error: {}", err);
         process::exit(1); // Exitting with non-zero code shows potential error in exec
     });
 
@@ -15,7 +15,7 @@ fn main() {
     println!();
 
     if let Err(e) = minigrep::run(config) {
-        println!("File reading error: {}!\n Exiting...", e);
+        eprintln!("Application error: {}!\n Exiting...", e);
         process::exit(1);
     }
 }

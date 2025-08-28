@@ -2,42 +2,42 @@ use std::error::Error;
 use std::{env, fs};
 
 pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
-    let contents = fs::read_to_string(config.file_path)?;
+  let contents = fs::read_to_string(config.file_path)?;
 
-    let results = if config.ignore_case {
-      search_case_insensitive(&config.query, &contents)
-    } else {      
-      search(&config.query, &contents)
-    };
+  let results = if config.ignore_case {
+    search_case_insensitive(&config.query, &contents)
+  } else {      
+    search(&config.query, &contents)
+  };
 
-    for line in results {
-      println!("{line}");
-    }
+  for line in results {
+    println!("{line}");
+  }
 
-    Ok(())
+  Ok(())
 }
 
 pub struct Config {
-    pub query: String,
-    pub file_path: String,
-    pub ignore_case: bool,
+  pub query: String,
+  pub file_path: String,
+  pub ignore_case: bool,
 }
 
 /// Config instance
 impl Config {
-    /// Builds a new `Config` object from args
-    /// and throws an `Err` in case `args.len() < 3`
-    pub fn build(args: &[String]) -> Result<Config, &'static str> {
-        if args.len() < 3 {
-            return Err("Not enough arguments!. Exiting...");
-        }
-        let query = args[1].clone();
-        let file_path = args[2].clone();
-
-        let ignore_case = env::var("IGNORE_CASE").is_ok();
-
-        Ok(Config { query, file_path, ignore_case })
+  /// Builds a new `Config` object from args
+  /// and throws an `Err` in case `args.len() < 3`
+  pub fn build(args: &[String]) -> Result<Config, &'static str> {
+    if args.len() < 3 {
+      return Err("Not enough arguments!. Exiting...");
     }
+    let query = args[1].clone();
+    let file_path = args[2].clone();
+
+    let ignore_case = env::var("IGNORE_CASE").is_ok();
+
+    Ok(Config { query, file_path, ignore_case })
+  }
 }
 
 /// Tests

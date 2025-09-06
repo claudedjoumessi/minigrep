@@ -2,7 +2,7 @@
 
 [![Rust](https://img.shields.io/badge/language-Rust-orange?style=for-the-badge&logo=rust)](https://www.rust-lang.org/)
 [![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)](LICENSE)
-[![Build](https://img.shields.io/github/actions/workflow/status/claudedjoumessi/minigrep/ci.yml?style=for-the-badge&logo=github)](https://github.com/yourusername/minigrep/actions)
+[![Build](https://img.shields.io/github/actions/workflow/status/claudedjoumessi/minigrep/ci.yml?style=for-the-badge&logo=github)](https://github.com/claudedjoumessi/minigrep/actions)
 [![Crates.io](https://img.shields.io/crates/v/minigrep?style=for-the-badge)](https://crates.io/crates/minigrep)
 
 **minigrep** is a blazing fast ⚡, minimal, and effective command-line tool for searching text patterns in files, inspired by the classic `grep` utility. Built with Rust for performance and reliability, minigrep is perfect for developers, sysadmins, and anyone who needs quick and accurate text searching.
